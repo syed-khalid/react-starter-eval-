@@ -10,9 +10,9 @@ const App = () => {
 	useEffect(() => {
 		const apiHandler = async () => {
 			const riderTrips = await API.fetchRecentTripsForRider(test);
-			riderTrips.map(async (obj) => {
-				const eMail = await (await API.fetchDriver(obj.driverUUID)).email;
-				setList((prev) => [...prev, eMail]);
+			riderTrips.forEach(async (obj) => {
+				const eMail = await API.fetchDriver(obj.driverUUID);
+				setList((prev) => [...prev, eMail.email]);
 			});
 		};
 		apiHandler();
